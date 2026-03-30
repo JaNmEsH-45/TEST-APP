@@ -28,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
     getCurrentLocationWeather();
   }
 
-  /// 🔍 SEARCH
   void getWeather() async {
     final city = controller.text.trim();
 
@@ -57,7 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  /// 📍 LOCATION
   Future<void> getCurrentLocationWeather() async {
     setState(() {
       isLoading = true;
@@ -100,7 +98,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  /// 🎨 SKY SYSTEM (LEVEL 3)
   List<Color> getGradient() {
     final hour = DateTime.now().hour;
 
@@ -108,17 +105,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final d = weather!.description.toLowerCase();
 
-    // 🌙 NIGHT
     if (hour < 6 || hour > 18) {
       return [Color(0xFF0D1B2A), Color(0xFF1B263B)];
     }
 
-    // 🌧 RAIN
     if (d.contains("rain")) {
       return [Color(0xFF2C3E50), Color(0xFF4CA1AF)];
     }
 
-    // ☁️ CLOUD / OVERCAST
     if (d.contains("cloud") || d.contains("overcast")) {
       return [Color(0xFF8A9BA8), Color(0xFF4F5D75)];
     }
@@ -218,20 +212,18 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
 
-          /// ☁️ CLOUDS
+          
           const Positioned.fill(child: CloudAnimation()),
 
-          /// 🌧 RAIN
+         
           if (weather != null &&
               weather!.description.toLowerCase().contains("rain"))
             const Positioned.fill(child: RainAnimation()),
 
-          /// ☀️ SUN
           if (weather != null &&
               weather!.description.toLowerCase().contains("clear"))
             const Positioned.fill(child: SunAnimation()),
 
-          /// UI
           SafeArea(
             child: SingleChildScrollView(
               padding: EdgeInsets.fromLTRB(
@@ -291,9 +283,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-////////////////////////////////////////////////////////////
-/// ☁️ SMOOTH CLOUDS
-////////////////////////////////////////////////////////////
 class CloudAnimation extends StatefulWidget {
   const CloudAnimation({super.key});
 
@@ -335,9 +324,6 @@ class _CloudAnimationState extends State<CloudAnimation>
   }
 }
 
-////////////////////////////////////////////////////////////
-/// 🌧️ CLEAN REALISTIC RAIN
-////////////////////////////////////////////////////////////
 class RainAnimation extends StatefulWidget {
   const RainAnimation({super.key});
 
@@ -413,9 +399,7 @@ class RainPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
 
-////////////////////////////////////////////////////////////
-/// ☀️ SUN
-////////////////////////////////////////////////////////////
+
 class SunAnimation extends StatefulWidget {
   const SunAnimation({super.key});
 
